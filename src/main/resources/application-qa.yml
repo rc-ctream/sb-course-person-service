@@ -1,0 +1,9 @@
+spring:
+  application:
+    name: sb-basics
+    version: .0
+
+persons:
+  api:
+    key: ${PERSONS_API_KEY}
+    url: http://qa.de

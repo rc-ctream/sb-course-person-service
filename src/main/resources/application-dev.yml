@@ -1,0 +1,4 @@
+persons:
+  api:
+    key: ${PERSONS_API_KEY}
+    url: http://dev.de
