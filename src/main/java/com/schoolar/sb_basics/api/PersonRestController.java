@@ -1,12 +1,11 @@
 package com.schoolar.sb_basics.api;
 
 import com.schoolar.sb_basics.config.PersonProperties;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.*;
 
 
 @RestController
@@ -16,9 +15,7 @@ public class PersonRestController {
     private final PersonProperties personProperties;
 
     @PostMapping
-    public ResponseEntity<Void> createPerson() {
-        System.out.println( "API_KEY: " + personProperties.getApi().getKey() );
-        System.out.println( "URL: " + personProperties.getApi().getUrl() );
+    public ResponseEntity<Void> createPerson( @RequestBody @Valid PersonRequestDto person ) {
         // HTTP STATUS 200 ohne BODY
         return ResponseEntity.ok().build();
     }

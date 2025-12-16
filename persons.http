@@ -4,3 +4,9 @@ GET https://examples.http-client.intellij.net/get
 
 ###
 POST http://localhost:8080/persons
+Content-Type: application/json
+
+{
+  "name": "Jonas",
+  "department": "DEV"
+}
