@@ -1,18 +1,15 @@
 package com.schoolar.sb_basics.persistent;
 
 
-//@Document(collection = "persons")
+import lombok.Data;
+
+import java.time.LocalDateTime;
+
+@Data
 public class Person {
+
+    private Integer id;
     private String name;
-
-    public Person() {
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName( String name ) {
-        this.name = name;
-    }
+    private String department;
+    private LocalDateTime createdAt;
 }
