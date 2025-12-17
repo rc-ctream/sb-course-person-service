@@ -1,4 +1,4 @@
-package com.schoolar.sb_basics.config;
+package com.schoolar.sb.config;
 
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;

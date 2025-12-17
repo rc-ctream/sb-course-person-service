@@ -1,7 +1,7 @@
-package com.schoolar.sb_basics.api.mapper;
+package com.schoolar.sb.api.mapper;
 
-import com.schoolar.sb_basics.api.PersonRequestDto;
-import com.schoolar.sb_basics.persistent.Person;
+import com.schoolar.sb.api.PersonRequestDto;
+import com.schoolar.sb.persistent.Person;
 import org.mapstruct.Mapper;
 import org.mapstruct.MappingConstants;
 

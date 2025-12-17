@@ -1,6 +1,6 @@
-package com.schoolar.sb_basics.api;
+package com.schoolar.sb.api;
 
-import com.schoolar.sb_basics.api.validation.AllowedDepartments;
+import com.schoolar.sb.api.validation.AllowedDepartments;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
 

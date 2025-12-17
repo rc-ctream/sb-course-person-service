@@ -1,9 +1,8 @@
-package com.schoolar.sb_basics.api;
+package com.schoolar.sb.api;
 
-import com.schoolar.sb_basics.api.mapper.PersonMapper;
-import com.schoolar.sb_basics.config.PersonProperties;
-import com.schoolar.sb_basics.persistent.Person;
-import com.schoolar.sb_basics.persistent.PersonRepository;
+import com.schoolar.sb.api.mapper.PersonMapper;
+import com.schoolar.sb.config.PersonProperties;
+import com.schoolar.sb.persistent.PersonRepository;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -11,10 +10,10 @@ import org.springframework.web.bind.annotation.*;
 
 
 @RestController
-@RequestMapping( "/persons" )
 @RequiredArgsConstructor
+@RequestMapping( "/persons" )
 public class PersonRestController {
-    private final PersonProperties personProperties;
+
     private final PersonRepository personRepository;
     private final PersonMapper personMapper;
 

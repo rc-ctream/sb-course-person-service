@@ -1,4 +1,4 @@
-package com.schoolar.sb_basics.api.validation;
+package com.schoolar.sb.api.validation;
 
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;

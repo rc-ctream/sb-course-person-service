@@ -1,4 +1,4 @@
-package com.schoolar.sb_basics.exception;
+package com.schoolar.sb.exception;
 
 public class PersonException extends RuntimeException {
 

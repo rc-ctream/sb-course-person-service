@@ -1,4 +1,4 @@
-package com.schoolar.sb_basics.persistent;
+package com.schoolar.sb.persistent;
 
 
 import lombok.Data;

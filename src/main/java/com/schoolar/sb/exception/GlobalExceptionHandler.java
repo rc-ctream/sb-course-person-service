@@ -1,4 +1,4 @@
-package com.schoolar.sb_basics.exception;
+package com.schoolar.sb.exception;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
