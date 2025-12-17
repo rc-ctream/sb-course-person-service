@@ -1,6 +1,7 @@
 package com.schoolar.sb.api.mapper;
 
 import com.schoolar.sb.api.PersonRequestDto;
+import com.schoolar.sb.api.dto.PersonDto;
 import com.schoolar.sb.persistent.Person;
 import org.mapstruct.Mapper;
 import org.mapstruct.MappingConstants;
@@ -10,4 +11,5 @@ public interface PersonMapper {
 
     Person fromDto( PersonRequestDto requestDto );
 
+    PersonDto toTdo( Person person );
 }

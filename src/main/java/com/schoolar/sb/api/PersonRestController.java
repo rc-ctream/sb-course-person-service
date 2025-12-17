@@ -1,12 +1,14 @@
 package com.schoolar.sb.api;
 
+import com.schoolar.sb.api.dto.PersonDto;
 import com.schoolar.sb.api.mapper.PersonMapper;
-import com.schoolar.sb.config.PersonProperties;
 import com.schoolar.sb.persistent.PersonRepository;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 
 @RestController
@@ -17,7 +19,6 @@ public class PersonRestController {
     private final PersonRepository personRepository;
     private final PersonMapper personMapper;
 
-
     @PostMapping
     public ResponseEntity<Void> createPerson( @RequestBody @Valid PersonRequestDto personRequestDto ) {
         var newPerson = personMapper.fromDto( personRequestDto );
@@ -25,12 +26,22 @@ public class PersonRestController {
         return ResponseEntity.ok().build();
     }
 
-
     @GetMapping
-    public ResponseEntity<Void> getAllPersons() {
-        // HTTP STATUS 200 ohne BODY
-        return ResponseEntity.ok().build();
+    public ResponseEntity<List<PersonDto>> getAllPersons() {
+        var persons = personRepository.findAll()
+                .stream()
+                .map( personMapper::toTdo )
+                .toList();
+        return ResponseEntity.ok( persons );
     }
 
-    // add new http GET endpoint, for get one person by id
+    @GetMapping( "/{personId}" )
+    public ResponseEntity<PersonDto> getPersonById( @PathVariable Integer personId ) {
+
+        var person = personRepository.findByPersonId( personId );
+        var personDto = personMapper.toTdo( person );
+
+        return ResponseEntity.ok( personDto );
+    }
+
 }

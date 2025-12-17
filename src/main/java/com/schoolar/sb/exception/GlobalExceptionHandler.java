@@ -20,6 +20,6 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler
     public ResponseEntity<String> handlePersonException( PersonException e ) {
-        return ResponseEntity.badRequest().body( "Person exception occurred: " + e.getMessage() );
+        return ResponseEntity.status( e.getStatusCode() ).body( e.getMessage() );
     }
 }
