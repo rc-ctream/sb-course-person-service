@@ -8,6 +8,7 @@ import java.util.Set;
 
 public class AllowedDepartmentsValidator implements ConstraintValidator<AllowedDepartments, String> {
 
+    // TODO: replace String with Enum
     private static final Set<String> ALLOWED_DEPARTMENTS = new HashSet<>();
 
     @Override

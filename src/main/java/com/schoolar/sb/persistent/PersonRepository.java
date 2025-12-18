@@ -19,13 +19,15 @@ public class PersonRepository {
     private static final Map<Integer, Person> PERSONS_DB = new HashMap<>();
     private final IdService idService;
 
-    public void save( Person person ) {
+    public Integer save( Person person ) {
         var personId = idService.createPersonId();
 
         person.setId( personId );
         person.setCreatedAt( LocalDateTime.now() );
 
         PERSONS_DB.put( personId, person );
+
+        return personId;
     }
 
     public List<Person> findAll() {

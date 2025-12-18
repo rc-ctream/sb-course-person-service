@@ -10,6 +10,7 @@ public class PersonRequestDto {
     @NotBlank
     private String name;
 
+    // TODO: use enum
     @AllowedDepartments
     private String department;
 }

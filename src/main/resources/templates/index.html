@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Welcome to Spring-Boot Thymeleaf</title>
+</head>
+<body>
+<form th:action="@{/submit}" th:object="${person}" method="post">
+
+    <label>Name:</label>
+    <input type="text" th:field="*{name}" required minlength="3"/>
+    <div th:if="${#fields.hasErrors('name')}"
+         th:errors="*{name}"></div>
+
+    <br/>
+
+    <label>Department:</label>
+    <select th:field="*{department}" required>
+        <option value="">-- bitte wählen --</option>
+        <option th:each="d : ${departments}"
+                th:value="${d}"
+                th:text="${d}">
+        </option>
+    </select>
+    <div th:if="${#fields.hasErrors('department')}"
+         th:errors="*{department}"></div>
+
+    <br/>
+
+    <button type="submit">Absenden</button>
+</form>
+
+<hr/>
+
+<h2>Angelegte Personen</h2>
+
+<table border="1">
+    <thead>
+    <tr>
+        <th>Id</th>
+        <th>Name</th>
+        <th>Department</th>
+        <th>Erstellt am</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="person : ${persons}">
+        <td th:text="${person.id}"></td>
+        <td th:text="${person.name}"></td>
+        <td th:text="${person.department}"></td>
+        <td th:text="${person.createdAt}"></td>
+    </tr>
+    <tr th:if="${#lists.isEmpty(persons)}">
+        <td colspan="2">Keine Einträge vorhanden</td>
+    </tr>
+    </tbody>
+</table>
+
+</body>
+</html>
