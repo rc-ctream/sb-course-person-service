@@ -1,25 +1,24 @@
 package com.schoolar.sb.api.validation;
 
+import com.schoolar.sb.persistent.DepartmentType;
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
 
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
-public class AllowedDepartmentsValidator implements ConstraintValidator<AllowedDepartments, String> {
+public class AllowedDepartmentsValidator implements ConstraintValidator<AllowedDepartments, DepartmentType> {
 
-    // TODO: replace String with Enum
-    private static final Set<String> ALLOWED_DEPARTMENTS = new HashSet<>();
+    private static final Set<DepartmentType> ALLOWED_DEPARTMENTS = new HashSet<>();
 
     @Override
     public void initialize( AllowedDepartments constraintAnnotation ) {
-        ALLOWED_DEPARTMENTS.add( "DEV" );
-        ALLOWED_DEPARTMENTS.add( "TEST" );
-        ALLOWED_DEPARTMENTS.add( "MARKETING" );
+        ALLOWED_DEPARTMENTS.addAll(Arrays.asList(DepartmentType.values()));
     }
 
     @Override
-    public boolean isValid( String inputValue, ConstraintValidatorContext constraintValidatorContext ) {
-        return inputValue != null && ALLOWED_DEPARTMENTS.contains( inputValue );
+    public boolean isValid(DepartmentType departmentType, ConstraintValidatorContext constraintValidatorContext) {
+        return departmentType != null && ALLOWED_DEPARTMENTS.contains(departmentType);
     }
 }

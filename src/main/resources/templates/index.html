@@ -24,7 +24,6 @@
     </select>
     <div th:if="${#fields.hasErrors('department')}"
          th:errors="*{department}"></div>
-
     <br/>
 
     <button type="submit">Absenden</button>
@@ -47,14 +46,13 @@
     <tr th:each="person : ${persons}">
         <td th:text="${person.id}"></td>
         <td th:text="${person.name}"></td>
-        <td th:text="${person.department}"></td>
-        <td th:text="${person.createdAt}"></td>
+        <td th:text="|${person.department?.id} - ${person.department?.description}|"></td>
+        <td th:text="|${#temporals.format(person.createdAt, 'dd.MM.yyyy - HH:mm')} Uhr|"></td>
     </tr>
     <tr th:if="${#lists.isEmpty(persons)}">
         <td colspan="2">Keine Einträge vorhanden</td>
     </tr>
     </tbody>
 </table>
-
 </body>
 </html>

@@ -16,11 +16,11 @@ import java.util.Objects;
 @RequiredArgsConstructor
 public class PersonRepository {
 
-    private static final Map<Integer, Person> PERSONS_DB = new HashMap<>();
+    private static final Map<Long, Person> PERSONS_DB = new HashMap<>();
     private final IdService idService;
 
-    public Integer save( Person person ) {
-        var personId = idService.createPersonId();
+    public Long save( Person person ) {
+        var personId = idService.createId();
 
         person.setId( personId );
         person.setCreatedAt( LocalDateTime.now() );
@@ -34,7 +34,7 @@ public class PersonRepository {
         return List.copyOf( PERSONS_DB.values() );
     }
 
-    public Person findByPersonId( Integer personId ) {
+    public Person findByPersonId( Long personId ) {
         var person = PERSONS_DB.get( personId );
         if ( Objects.isNull( person ) ) {
             throw new PersonException( "Person with id " + personId + " not found" );

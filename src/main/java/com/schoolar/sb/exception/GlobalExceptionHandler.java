@@ -22,4 +22,9 @@ public class GlobalExceptionHandler {
     public ResponseEntity<String> handlePersonException( PersonException e ) {
         return ResponseEntity.status( e.getStatusCode() ).body( e.getMessage() );
     }
+
+    @ExceptionHandler
+    public ResponseEntity<String> handleDepartmentException(DepartmentException e) {
+        return ResponseEntity.status( e.getStatusCode() ).body( e.getMessage() );
+    }
 }

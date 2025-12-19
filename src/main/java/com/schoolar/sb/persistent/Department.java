@@ -6,7 +6,7 @@ import java.time.LocalDateTime;
 
 @Data
 public class Department {
-    private Integer id;
+    private Long id;
     private DepartmentType type;
     private String description;
     private LocalDateTime createdAt;

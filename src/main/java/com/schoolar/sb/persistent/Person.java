@@ -7,7 +7,7 @@ import java.time.LocalDateTime;
 
 @Data
 public class Person {
-    private Integer id;
+    private Long id;
     private String name;
     private Department department;
     private LocalDateTime createdAt;

@@ -36,7 +36,7 @@ public class PersonRestController {
     }
 
     @GetMapping( "/{personId}" )
-    public ResponseEntity<PersonDto> getPersonById( @PathVariable Integer personId ) {
+    public ResponseEntity<PersonDto> getPersonById( @PathVariable Long personId ) {
 
         var person = personRepository.findByPersonId( personId );
         var personDto = personMapper.toTdo( person );

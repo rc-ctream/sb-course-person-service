@@ -1,30 +1,27 @@
 package com.schoolar.sb.service;
 
 import com.schoolar.sb.persistent.Department;
+import com.schoolar.sb.persistent.DepartmentRepository;
 import com.schoolar.sb.persistent.DepartmentType;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDateTime;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
 public class DepartmentService {
 
-    private final IdService idService;
+    private final DepartmentRepository departmentRepo;
 
-    public Department createDepartment( String name ) {
-        var type = DepartmentType.valueOf( name );
-
+    public Department createDepartment( DepartmentType departmentType ) {
         var department = new Department();
-        department.setType( type );
-        department.setDescription( "???" );
-        department.setCreatedAt( LocalDateTime.now() );
+        department.setType( departmentType );
+        department.setDescription(departmentType.getDescription());
+        return departmentRepo.save(department);
+    }
 
-
-        var id = idService.createPersonId();
-        department.setId( id );
-
-        return department;
+    public Optional<Department> getDepartment(DepartmentType departmentType) {
+        return departmentRepo.findByType(departmentType);
     }
 }

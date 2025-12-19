@@ -1,6 +1,7 @@
 package com.schoolar.sb.api;
 
 import com.schoolar.sb.api.validation.AllowedDepartments;
+import com.schoolar.sb.persistent.DepartmentType;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
 
@@ -10,7 +11,6 @@ public class PersonRequestDto {
     @NotBlank
     private String name;
 
-    // TODO: use enum
     @AllowedDepartments
-    private String department;
+    private DepartmentType department;
 }

@@ -3,11 +3,13 @@ package com.schoolar.sb.service;
 import com.schoolar.sb.api.PersonRequestDto;
 import com.schoolar.sb.api.dto.PersonDto;
 import com.schoolar.sb.api.mapper.PersonMapper;
+import com.schoolar.sb.persistent.Department;
 import com.schoolar.sb.persistent.PersonRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -16,12 +18,13 @@ public class PersonService {
     private final PersonMapper personMapper;
     private final DepartmentService departmentService;
 
-    public Integer createPerson( PersonRequestDto personRequestDto ) {
+    public Long createPerson( PersonRequestDto personRequestDto ) {
         var currentPerson = personMapper.fromDto( personRequestDto );
 
-        var department = departmentService.createDepartment( personRequestDto.getDepartment() );
-        currentPerson.setDepartment( department );
+        Optional<Department> optDepartment = departmentService.getDepartment(personRequestDto.getDepartment());
+        var department = optDepartment.orElseGet(()-> departmentService.createDepartment(personRequestDto.getDepartment()));
 
+        currentPerson.setDepartment( department );
         return personRepository.save( currentPerson );
     }
 
@@ -32,7 +35,7 @@ public class PersonService {
                 .toList();
     }
 
-    public PersonDto getPersonById( Integer personId ) {
+    public PersonDto getPersonById( Long personId ) {
         return personMapper.toTdo( personRepository.findByPersonId( personId ) );
     }
 }
