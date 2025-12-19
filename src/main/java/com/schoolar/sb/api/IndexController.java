@@ -1,5 +1,6 @@
 package com.schoolar.sb.api;
 
+import com.schoolar.sb.persistent.DepartmentType;
 import com.schoolar.sb.service.PersonService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -21,7 +22,7 @@ public class IndexController {
     @GetMapping( "/index" )
     public String index( Model model ) {
         model.addAttribute( "person", new PersonRequestDto() );
-        model.addAttribute( "departments", List.of( "DEV", "MARKETING", "TEST" ) );
+        model.addAttribute( "departments", DepartmentType.values());
         model.addAttribute( "persons", personService.getAllPersons() );
         return "index";
     }
