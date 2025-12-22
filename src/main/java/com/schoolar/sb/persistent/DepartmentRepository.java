@@ -22,19 +22,6 @@ public class DepartmentRepository {
     private final Map<DepartmentType, Department> departmentDB = new HashMap<>();
     private final IdService idService;
 
-
-    @EventListener( ApplicationReadyEvent.class )
-    public void initDepartments() {
-        Stream.of( DepartmentType.values() )
-                .map( type -> {
-                    var department = new Department();
-                    department.setType( type );
-                    department.setDescription( type.getDescription() );
-                    return department;
-                } )
-                .forEach( this::save );
-    }
-
     public Department save( Department department ) {
         Long createdId = idService.createId();
 

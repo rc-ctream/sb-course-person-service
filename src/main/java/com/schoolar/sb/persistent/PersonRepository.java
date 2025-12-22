@@ -2,8 +2,11 @@ package com.schoolar.sb.persistent;
 
 
 import com.schoolar.sb.exception.PersonException;
+import com.schoolar.sb.service.DepartmentService;
 import com.schoolar.sb.service.IdService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.boot.context.event.ApplicationReadyEvent;
+import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
@@ -11,6 +14,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.stream.Stream;
 
 @Component
 @RequiredArgsConstructor
@@ -18,6 +22,9 @@ public class PersonRepository {
 
     private static final Map<Long, Person> PERSONS_DB = new HashMap<>();
     private final IdService idService;
+
+
+
 
     public Long save( Person person ) {
         var personId = idService.createId();
