@@ -2,6 +2,7 @@ package com.schoolar.sb.api;
 
 import com.schoolar.sb.api.dto.PersonDto;
 import com.schoolar.sb.api.mapper.PersonMapper;
+import com.schoolar.sb.persistent.DepartmentType;
 import com.schoolar.sb.persistent.PersonRepository;
 import com.schoolar.sb.service.PersonService;
 import jakarta.validation.Valid;
@@ -48,7 +49,8 @@ public class PersonRestController {
 
     @PutMapping( "/{personId}" )
     public ResponseEntity<Void> updatePerson( @PathVariable Long personId, @RequestBody PersonUpdateDto personUpdateDto ) {
-        personService.updatePersonName( personId, personUpdateDto.getName() );
+        var type = DepartmentType.valueOf( personUpdateDto.getDepartment() );
+        personService.updatePerson( personId, personUpdateDto.getName(), type );
         return ResponseEntity.ok().build();
     }
 

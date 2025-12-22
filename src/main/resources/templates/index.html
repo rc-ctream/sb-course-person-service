@@ -40,6 +40,7 @@
         <th>Name</th>
         <th>Department</th>
         <th>Erstellt am</th>
+        <th>Aktualisiert am</th>
         <th>Aktionen</th>
     </tr>
     </thead>
@@ -47,8 +48,21 @@
     <tr th:each="person : ${persons}" th:id="${person.id}">
         <td th:text="${person.id}"></td>
         <td class="person-name" contenteditable="true" th:text="${person.name}"></td>
-        <td th:text="|${person.department?.id} - ${person.department?.description}|"></td>
+
+        <td>
+            <select class="department-select">
+                <option th:each="d : ${departments}"
+                        th:value="${d}"
+                        th:text="${d}"
+                        th:selected="${person.department.type == d}">
+                </option>
+            </select>
+        </td>
+
+        <!--        <td th:text="|${person.department?.id} - ${person.department?.description}|"></td>-->
+
         <td th:text="|${#temporals.format(person.createdAt, 'dd.MM.yyyy - HH:mm')} Uhr|"></td>
+        <td th:text="|${#temporals.format(person.updatedAt, 'dd.MM.yyyy - HH:mm')} Uhr|"></td>
         <td>
             <button type="button" th:onclick="|updatePerson(${person.id})|">Update</button>
         </td>
@@ -64,14 +78,19 @@
         console.log(id);
         const row = document.getElementById(id);
         const updatedName = row.querySelector('.person-name').innerText;
+        const department = row.querySelector('.department-select').value;
+        console.log(department);
 
         if (confirm(updatedName)) {
-            sendRequestUpdatePersonName(id, updatedName);
+            sendRequestUpdatePersonName(id, updatedName, department);
         }
     }
 
-    function sendRequestUpdatePersonName(id, newName) {
-        const payload = {name: newName};
+    function sendRequestUpdatePersonName(id, newName, department) {
+        const payload = {
+            name: newName,
+            department: department
+        };
 
         fetch(`/persons/${id}`, {
             method: 'PUT',

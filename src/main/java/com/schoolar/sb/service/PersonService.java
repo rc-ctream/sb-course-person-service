@@ -3,6 +3,7 @@ package com.schoolar.sb.service;
 import com.schoolar.sb.api.PersonRequestDto;
 import com.schoolar.sb.api.dto.PersonDto;
 import com.schoolar.sb.api.mapper.PersonMapper;
+import com.schoolar.sb.persistent.DepartmentType;
 import com.schoolar.sb.persistent.PersonRepository;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -36,9 +37,13 @@ public class PersonService {
         return personMapper.toTdo( personRepository.findByPersonId( personId ) );
     }
 
-    public void updatePersonName( Long personId, @NotBlank String name ) {
+    public void updatePerson( Long personId, @NotBlank String name, DepartmentType departmentType ) {
         var currentPerson = personRepository.findByPersonId( personId );
         currentPerson.setName( name );
+
+        var newDepartment = departmentService.getDepartment( departmentType );
+        currentPerson.setDepartment( newDepartment );
+
         personRepository.update( currentPerson );
     }
 }

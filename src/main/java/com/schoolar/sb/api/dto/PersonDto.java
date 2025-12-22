@@ -11,4 +11,5 @@ public class PersonDto {
     private String name;
     private Department department;
     private LocalDateTime createdAt;
+    private LocalDateTime updatedAt;
 }

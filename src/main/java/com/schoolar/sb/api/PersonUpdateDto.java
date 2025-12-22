@@ -7,4 +7,5 @@ import lombok.Data;
 public class PersonUpdateDto {
     @NotBlank
     private String name;
+    private String department;
 }
