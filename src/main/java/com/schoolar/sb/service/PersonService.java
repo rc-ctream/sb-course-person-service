@@ -11,6 +11,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Objects;
 
 @Service
 @RequiredArgsConstructor
@@ -45,5 +46,14 @@ public class PersonService {
         currentPerson.setDepartment( newDepartment );
 
         personRepository.update( currentPerson );
+    }
+
+    public void deletePerson( Long personId ) {
+        var person = getPersonById( personId );
+        if ( Objects.isNull( person ) ) {
+            //
+        }
+
+        personRepository.deleteUserById(personId);
     }
 }

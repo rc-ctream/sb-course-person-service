@@ -1,4 +1,4 @@
-package com.schoolar.sb.api;
+package com.schoolar.sb.api.dto;
 
 import jakarta.validation.constraints.NotBlank;
 import lombok.Data;

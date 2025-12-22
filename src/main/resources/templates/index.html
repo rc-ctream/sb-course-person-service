@@ -59,12 +59,11 @@
             </select>
         </td>
 
-        <!--        <td th:text="|${person.department?.id} - ${person.department?.description}|"></td>-->
-
         <td th:text="|${#temporals.format(person.createdAt, 'dd.MM.yyyy - HH:mm')} Uhr|"></td>
         <td th:text="|${#temporals.format(person.updatedAt, 'dd.MM.yyyy - HH:mm')} Uhr|"></td>
         <td>
             <button type="button" th:onclick="|updatePerson(${person.id})|">Update</button>
+            <button type="button" th:onclick="|deletePerson(${person.id})|">Delete</button>
         </td>
     </tr>
     <tr th:if="${#lists.isEmpty(persons)}">
@@ -74,6 +73,15 @@
 </table>
 
 <script th:inline="javascript">
+    function deletePerson(id) {
+        const row = document.getElementById(id);
+        const updatedName = row.querySelector('.person-name').innerText;
+
+        if (confirm("User " + updatedName + " wirklich löschen?")) {
+            sendDeleteRequest(id);
+        }
+    }
+
     function updatePerson(id) {
         console.log(id);
         const row = document.getElementById(id);
@@ -101,6 +109,23 @@
         }).then(response => {
             if (response.ok) {
                 console.log('Person updated successfully');
+                window.location.reload();
+            } else {
+                console.log('Error while updating person: ' + response.status);
+            }
+        }).catch(error => {
+            console.log(error);
+            alert('Error while updating person');
+        })
+
+    }
+
+    function sendDeleteRequest(id) {
+        fetch(`/persons/${id}`, {
+            method: 'DELETE',
+        }).then(response => {
+            if (response.ok) {
+                console.log('Person deleted successfully');
                 window.location.reload();
             } else {
                 console.log('Error while updating person: ' + response.status);

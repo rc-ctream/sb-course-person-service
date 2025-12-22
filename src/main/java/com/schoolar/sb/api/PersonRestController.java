@@ -1,6 +1,7 @@
 package com.schoolar.sb.api;
 
 import com.schoolar.sb.api.dto.PersonDto;
+import com.schoolar.sb.api.dto.PersonUpdateDto;
 import com.schoolar.sb.api.mapper.PersonMapper;
 import com.schoolar.sb.persistent.DepartmentType;
 import com.schoolar.sb.persistent.PersonRepository;
@@ -51,7 +52,13 @@ public class PersonRestController {
     public ResponseEntity<Void> updatePerson( @PathVariable Long personId, @RequestBody PersonUpdateDto personUpdateDto ) {
         var type = DepartmentType.valueOf( personUpdateDto.getDepartment() );
         personService.updatePerson( personId, personUpdateDto.getName(), type );
-        return ResponseEntity.ok().build();
+        return ResponseEntity.noContent().build();
+    }
+
+    @DeleteMapping( "/{personId}" )
+    public ResponseEntity<Void> deletePerson( @PathVariable Long personId ) {
+        personService.deletePerson( personId );
+        return ResponseEntity.noContent().build();
     }
 
 }
