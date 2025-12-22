@@ -11,8 +11,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import java.util.List;
-
 @Controller
 @RequiredArgsConstructor
 public class IndexController {
@@ -22,7 +20,7 @@ public class IndexController {
     @GetMapping( "/index" )
     public String index( Model model ) {
         model.addAttribute( "person", new PersonRequestDto() );
-        model.addAttribute( "departments", DepartmentType.values());
+        model.addAttribute( "departments", DepartmentType.values() );
         model.addAttribute( "persons", personService.getAllPersons() );
         return "index";
     }

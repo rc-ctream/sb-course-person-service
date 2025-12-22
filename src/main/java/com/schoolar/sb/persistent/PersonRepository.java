@@ -30,6 +30,11 @@ public class PersonRepository {
         return personId;
     }
 
+    public void update( Person person ) {
+        person.setUpdatedAt( LocalDateTime.now() );
+        PERSONS_DB.put( person.getId(), person );
+    }
+
     public List<Person> findAll() {
         return List.copyOf( PERSONS_DB.values() );
     }

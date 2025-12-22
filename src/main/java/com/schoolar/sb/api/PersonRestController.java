@@ -3,6 +3,7 @@ package com.schoolar.sb.api;
 import com.schoolar.sb.api.dto.PersonDto;
 import com.schoolar.sb.api.mapper.PersonMapper;
 import com.schoolar.sb.persistent.PersonRepository;
+import com.schoolar.sb.service.PersonService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -18,6 +19,7 @@ public class PersonRestController {
 
     private final PersonRepository personRepository;
     private final PersonMapper personMapper;
+    private final PersonService personService;
 
     @PostMapping
     public ResponseEntity<Void> createPerson( @RequestBody @Valid PersonRequestDto personRequestDto ) {
@@ -42,6 +44,12 @@ public class PersonRestController {
         var personDto = personMapper.toTdo( person );
 
         return ResponseEntity.ok( personDto );
+    }
+
+    @PutMapping( "/{personId}" )
+    public ResponseEntity<Void> updatePerson( @PathVariable Long personId, @RequestBody PersonUpdateDto personUpdateDto ) {
+        personService.updatePersonName( personId, personUpdateDto.getName() );
+        return ResponseEntity.ok().build();
     }
 
 }

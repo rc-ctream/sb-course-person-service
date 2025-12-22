@@ -40,19 +40,58 @@
         <th>Name</th>
         <th>Department</th>
         <th>Erstellt am</th>
+        <th>Aktionen</th>
     </tr>
     </thead>
     <tbody>
-    <tr th:each="person : ${persons}">
+    <tr th:each="person : ${persons}" th:id="${person.id}">
         <td th:text="${person.id}"></td>
-        <td th:text="${person.name}"></td>
+        <td class="person-name" contenteditable="true" th:text="${person.name}"></td>
         <td th:text="|${person.department?.id} - ${person.department?.description}|"></td>
         <td th:text="|${#temporals.format(person.createdAt, 'dd.MM.yyyy - HH:mm')} Uhr|"></td>
+        <td>
+            <button type="button" th:onclick="|updatePerson(${person.id})|">Update</button>
+        </td>
     </tr>
     <tr th:if="${#lists.isEmpty(persons)}">
         <td colspan="2">Keine Einträge vorhanden</td>
     </tr>
     </tbody>
 </table>
+
+<script th:inline="javascript">
+    function updatePerson(id) {
+        console.log(id);
+        const row = document.getElementById(id);
+        const updatedName = row.querySelector('.person-name').innerText;
+
+        if (confirm(updatedName)) {
+            sendRequestUpdatePersonName(id, updatedName);
+        }
+    }
+
+    function sendRequestUpdatePersonName(id, newName) {
+        const payload = {name: newName};
+
+        fetch(`/persons/${id}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(payload)
+        }).then(response => {
+            if (response.ok) {
+                console.log('Person updated successfully');
+                window.location.reload();
+            } else {
+                console.log('Error while updating person: ' + response.status);
+            }
+        }).catch(error => {
+            console.log(error);
+            alert('Error while updating person');
+        })
+
+    }
+</script>
 </body>
 </html>
