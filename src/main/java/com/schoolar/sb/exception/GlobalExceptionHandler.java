@@ -24,7 +24,7 @@ public class GlobalExceptionHandler {
     }
 
     @ExceptionHandler
-    public ResponseEntity<String> handleDepartmentException(DepartmentException e) {
+    public ResponseEntity<String> handleDepartmentException( DepartmentException e ) {
         return ResponseEntity.status( e.getStatusCode() ).body( e.getMessage() );
     }
 }

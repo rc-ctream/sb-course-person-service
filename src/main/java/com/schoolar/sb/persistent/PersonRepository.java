@@ -7,10 +7,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
+import java.util.*;
 
 @Component
 @RequiredArgsConstructor
@@ -49,5 +46,15 @@ public class PersonRepository {
 
     public void deleteUserById( Long personId ) {
         PERSONS_DB.remove( personId );
+    }
+
+    public Optional<Person> findByNameAndDepartment( String name, DepartmentType department ) {
+        return PERSONS_DB.values()
+                .stream()
+                .filter( person ->
+                        person.getName().equals( name )
+                        && person.getDepartment().getType().equals( department )
+                )
+                .findFirst();
     }
 }

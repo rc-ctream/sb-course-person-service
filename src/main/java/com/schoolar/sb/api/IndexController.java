@@ -1,5 +1,6 @@
 package com.schoolar.sb.api;
 
+import com.schoolar.sb.api.validation.ValidPerson;
 import com.schoolar.sb.persistent.DepartmentType;
 import com.schoolar.sb.service.PersonService;
 import jakarta.validation.Valid;
@@ -26,8 +27,15 @@ public class IndexController {
     }
 
     @PostMapping( "/submit" )
-    public String submit( @Valid @ModelAttribute PersonRequestDto person, BindingResult bindingResult,
-                          Model model ) {
+    public String submit( @Valid @ModelAttribute( "person" ) @ValidPerson PersonRequestDto person,
+                          BindingResult bindingResult, Model model ) {
+
+
+        if ( bindingResult.hasErrors() ) {
+            model.addAttribute( "departments", DepartmentType.values() );
+            model.addAttribute( "persons", personService.getAllPersons() );
+            return "index";
+        }
 
         personService.createPerson( person );
         return "redirect:/index";
