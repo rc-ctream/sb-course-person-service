@@ -1,6 +1,6 @@
 package com.schoolar.sb.api.dto;
 
-import com.schoolar.sb.persistent.Department;
+import com.schoolar.sb.persistent.entity.Department;
 import lombok.Data;
 
 import java.time.LocalDateTime;

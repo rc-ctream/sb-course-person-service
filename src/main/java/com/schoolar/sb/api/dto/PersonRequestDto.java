@@ -1,7 +1,7 @@
-package com.schoolar.sb.api;
+package com.schoolar.sb.api.dto;
 
 import com.schoolar.sb.api.validation.AllowedDepartments;
-import com.schoolar.sb.persistent.DepartmentType;
+import com.schoolar.sb.persistent.entity.DepartmentType;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
 

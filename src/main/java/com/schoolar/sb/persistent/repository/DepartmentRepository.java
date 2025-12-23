@@ -1,17 +1,16 @@
-package com.schoolar.sb.persistent;
+package com.schoolar.sb.persistent.repository;
 
+import com.schoolar.sb.persistent.entity.Department;
+import com.schoolar.sb.persistent.entity.DepartmentType;
 import com.schoolar.sb.service.IdService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.boot.context.event.ApplicationReadyEvent;
-import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
-import java.util.stream.Stream;
 
 @Slf4j
 @Component

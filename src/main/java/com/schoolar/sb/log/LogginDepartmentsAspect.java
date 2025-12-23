@@ -1,8 +1,8 @@
 package com.schoolar.sb.log;
 
 import com.schoolar.sb.exception.DepartmentException;
-import com.schoolar.sb.persistent.Department;
-import com.schoolar.sb.persistent.DepartmentType;
+import com.schoolar.sb.persistent.entity.Department;
+import com.schoolar.sb.persistent.entity.DepartmentType;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.AfterReturning;
@@ -18,14 +18,14 @@ import java.util.Optional;
 @Component
 public class LogginDepartmentsAspect {
 
-    @Before("execution(* com.schoolar.sb.persistent.DepartmentRepository.save(..))")
+    @Before("execution(* com.schoolar.sb.persistent.repository.DepartmentRepository.save(..))")
     public void logBeforeSave(JoinPoint joinPoint) {
         var department = (Department) joinPoint.getArgs()[0];
         log.info( "AOP - Called save department method with department " + department.getType().name() );
     }
 
     @AfterReturning(
-            value = "execution(* com.schoolar.sb.persistent.DepartmentRepository.findByType(..)) && args(departmentType)",
+            value = "execution(* com.schoolar.sb.persistent.repository.DepartmentRepository.findByType(..)) && args(departmentType)",
             returning = "department")
     public void logAfterFindByType(DepartmentType departmentType, Optional<Department> department ) {
         if(department.isEmpty())
@@ -35,7 +35,7 @@ public class LogginDepartmentsAspect {
     }
 
     @AfterThrowing(
-            pointcut = "execution(* com.schoolar.sb.persistent.DepartmentRepository.findByType(..)) && args(departmentType)",
+            pointcut = "execution(* com.schoolar.sb.persistent.repository.DepartmentRepository.findByType(..)) && args(departmentType)",
             throwing = "ex" )
     public void logAfterFindByType(DepartmentType departmentType, DepartmentException ex ) {
         log.info( "AOP - Exception occurred while trying to find deparment by type " + departmentType );

@@ -1,7 +1,8 @@
-package com.schoolar.sb.api;
+package com.schoolar.sb.api.controller;
 
+import com.schoolar.sb.api.dto.PersonRequestDto;
 import com.schoolar.sb.api.validation.ValidPerson;
-import com.schoolar.sb.persistent.DepartmentType;
+import com.schoolar.sb.persistent.entity.DepartmentType;
 import com.schoolar.sb.service.PersonService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;

@@ -1,7 +1,9 @@
-package com.schoolar.sb.persistent;
+package com.schoolar.sb.persistent.repository;
 
 
 import com.schoolar.sb.exception.PersonException;
+import com.schoolar.sb.persistent.entity.DepartmentType;
+import com.schoolar.sb.persistent.entity.Person;
 import com.schoolar.sb.service.IdService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

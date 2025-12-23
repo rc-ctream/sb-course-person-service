@@ -1,9 +1,10 @@
 package com.schoolar.sb.api;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.schoolar.sb.api.dto.PersonRequestDto;
 import com.schoolar.sb.api.mapper.PersonMapper;
-import com.schoolar.sb.persistent.DepartmentType;
-import com.schoolar.sb.persistent.PersonRepository;
+import com.schoolar.sb.persistent.entity.DepartmentType;
+import com.schoolar.sb.persistent.repository.PersonRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;

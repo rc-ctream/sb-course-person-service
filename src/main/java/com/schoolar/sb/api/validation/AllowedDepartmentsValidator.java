@@ -1,6 +1,6 @@
 package com.schoolar.sb.api.validation;
 
-import com.schoolar.sb.persistent.DepartmentType;
+import com.schoolar.sb.persistent.entity.DepartmentType;
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
 

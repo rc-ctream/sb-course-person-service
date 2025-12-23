@@ -1,6 +1,10 @@
 package com.schoolar.sb.data;
 
-import com.schoolar.sb.persistent.*;
+import com.schoolar.sb.persistent.entity.Department;
+import com.schoolar.sb.persistent.entity.DepartmentType;
+import com.schoolar.sb.persistent.entity.Person;
+import com.schoolar.sb.persistent.repository.DepartmentRepository;
+import com.schoolar.sb.persistent.repository.PersonRepository;
 import com.schoolar.sb.service.DepartmentService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.context.event.ApplicationReadyEvent;

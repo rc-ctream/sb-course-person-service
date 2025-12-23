@@ -1,6 +1,6 @@
-package com.schoolar.sb.onboarding;
+package com.schoolar.sb.service;
 
-import com.schoolar.sb.persistent.Person;
+import com.schoolar.sb.persistent.entity.Person;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.retry.annotation.Backoff;
 import org.springframework.retry.annotation.Recover;

@@ -1,13 +1,11 @@
 package com.schoolar.sb.service;
 
-import com.schoolar.sb.api.PersonRequestDto;
+import com.schoolar.sb.api.dto.PersonRequestDto;
 import com.schoolar.sb.api.dto.PersonDto;
 import com.schoolar.sb.api.mapper.PersonMapper;
-import com.schoolar.sb.email.EmailSendService;
-import com.schoolar.sb.onboarding.OnboardingService;
-import com.schoolar.sb.persistent.DepartmentType;
-import com.schoolar.sb.persistent.Person;
-import com.schoolar.sb.persistent.PersonRepository;
+import com.schoolar.sb.persistent.entity.DepartmentType;
+import com.schoolar.sb.persistent.entity.Person;
+import com.schoolar.sb.persistent.repository.PersonRepository;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.RequiredArgsConstructor;

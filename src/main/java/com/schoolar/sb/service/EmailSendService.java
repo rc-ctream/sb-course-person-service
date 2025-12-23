@@ -1,6 +1,6 @@
-package com.schoolar.sb.email;
+package com.schoolar.sb.service;
 
-import com.schoolar.sb.persistent.DepartmentType;
+import com.schoolar.sb.persistent.entity.DepartmentType;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.scheduling.annotation.Async;

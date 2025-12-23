@@ -1,7 +1,7 @@
 package com.schoolar.sb.api.validation;
 
-import com.schoolar.sb.api.PersonRequestDto;
-import com.schoolar.sb.persistent.PersonRepository;
+import com.schoolar.sb.api.dto.PersonRequestDto;
+import com.schoolar.sb.persistent.repository.PersonRepository;
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
 import lombok.RequiredArgsConstructor;

@@ -1,9 +1,9 @@
 package com.schoolar.sb.service;
 
 import com.schoolar.sb.exception.DepartmentException;
-import com.schoolar.sb.persistent.Department;
-import com.schoolar.sb.persistent.DepartmentRepository;
-import com.schoolar.sb.persistent.DepartmentType;
+import com.schoolar.sb.persistent.entity.Department;
+import com.schoolar.sb.persistent.repository.DepartmentRepository;
+import com.schoolar.sb.persistent.entity.DepartmentType;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
