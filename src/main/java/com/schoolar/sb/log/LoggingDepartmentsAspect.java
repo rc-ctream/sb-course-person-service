@@ -16,7 +16,7 @@ import java.util.Optional;
 @Slf4j
 @Aspect
 @Component
-public class LogginDepartmentsAspect {
+public class LoggingDepartmentsAspect {
 
     @Before("execution(* com.schoolar.sb.persistent.repository.DepartmentRepository.save(..))")
     public void logBeforeSave(JoinPoint joinPoint) {
