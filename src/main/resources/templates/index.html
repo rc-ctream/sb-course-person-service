@@ -3,6 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <title>Welcome to Spring-Boot Thymeleaf</title>
+    <script src="[https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.5.1/sockjs.min.js](https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.5.1/sockjs.min.js)"></script>
+    <script src="[https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js](https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js)"></script>
 </head>
 <body>
 <form th:action="@{/submit}" th:object="${person}" method="post">
@@ -31,48 +33,76 @@
 
 <hr/>
 
-<h2>Angelegte Personen</h2>
+<div class="persons">
+    <h2>Angelegte Personen</h2>
+    <table border="1">
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Department</th>
+            <th>Erstellt am</th>
+            <th>Aktualisiert am</th>
+            <th>Aktionen</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="person : ${persons}" th:id="${person.id}">
+            <td th:text="${person.id}"></td>
+            <td class="person-name" contenteditable="true" th:text="${person.name}"></td>
 
-<table border="1">
-    <thead>
-    <tr>
-        <th>Id</th>
-        <th>Name</th>
-        <th>Department</th>
-        <th>Erstellt am</th>
-        <th>Aktualisiert am</th>
-        <th>Aktionen</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr th:each="person : ${persons}" th:id="${person.id}">
-        <td th:text="${person.id}"></td>
-        <td class="person-name" contenteditable="true" th:text="${person.name}"></td>
+            <td>
+                <select class="department-select">
+                    <option th:each="d : ${departments}"
+                            th:value="${d}"
+                            th:text="${d}"
+                            th:selected="${person.department.type == d}">
+                    </option>
+                </select>
+            </td>
 
-        <td>
-            <select class="department-select">
-                <option th:each="d : ${departments}"
-                        th:value="${d}"
-                        th:text="${d}"
-                        th:selected="${person.department.type == d}">
-                </option>
-            </select>
-        </td>
+            <td th:text="|${#temporals.format(person.createdAt, 'dd.MM.yyyy - HH:mm')} Uhr|"></td>
+            <td th:text="|${#temporals.format(person.updatedAt, 'dd.MM.yyyy - HH:mm')} Uhr|"></td>
+            <td>
+                <button type="button" th:onclick="|updatePerson(${person.id})|">Update</button>
+                <button type="button" th:onclick="|deletePerson(${person.id})|">Delete</button>
+            </td>
+        </tr>
+        <tr th:if="${#lists.isEmpty(persons)}">
+            <td colspan="2">Keine Einträge vorhanden</td>
+        </tr>
+        </tbody>
+    </table>
+</div>
 
-        <td th:text="|${#temporals.format(person.createdAt, 'dd.MM.yyyy - HH:mm')} Uhr|"></td>
-        <td th:text="|${#temporals.format(person.updatedAt, 'dd.MM.yyyy - HH:mm')} Uhr|"></td>
-        <td>
-            <button type="button" th:onclick="|updatePerson(${person.id})|">Update</button>
-            <button type="button" th:onclick="|deletePerson(${person.id})|">Delete</button>
-        </td>
-    </tr>
-    <tr th:if="${#lists.isEmpty(persons)}">
-        <td colspan="2">Keine Einträge vorhanden</td>
-    </tr>
-    </tbody>
-</table>
+<div class="chat">
+    <input type="text" id="name" placeholder="Dein Name">
+    <input type="text" id="message" placeholder="Deine Nachricht">
+    <button onclick="send()">Senden</button>
+</div>
 
 <script th:inline="javascript">
+    var socket = new SockJS('/ws');
+    var stompClient = Stomp.over(socket);
+
+    stompClient.connect({}, function (frame) {
+        console.log('Connected: ' + frame);
+
+        stompClient.subscribe('/topic/greetings', function (greeting) {
+            console.log(greeting.body);
+        });
+    })
+
+    function send() {
+        const name = document.getElementById('name').value;
+        const message = document.getElementById('message').value;
+
+         if (name && message) {
+            const chatMessage = { sender: name, message: message };
+            stompClient.send('/app/greeting', {}, JSON.stringify(chatMessage));
+        }
+    }
+
     function deletePerson(id) {
         const row = document.getElementById(id);
         const updatedName = row.querySelector('.person-name').innerText;
