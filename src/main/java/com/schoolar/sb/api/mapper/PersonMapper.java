@@ -1,12 +1,13 @@
 package com.schoolar.sb.api.mapper;
 
-import com.schoolar.sb.api.dto.PersonRequestDto;
 import com.schoolar.sb.api.dto.PersonDto;
+import com.schoolar.sb.api.dto.PersonRequestDto;
 import com.schoolar.sb.persistent.entity.Person;
 import org.mapstruct.Mapper;
-import org.mapstruct.MappingConstants;
 
-@Mapper( componentModel = MappingConstants.ComponentModel.SPRING )
+import static org.mapstruct.MappingConstants.ComponentModel.SPRING;
+
+@Mapper( componentModel = SPRING, uses = DepartmentMapper.class )
 public interface PersonMapper {
 
     Person fromDto( PersonRequestDto requestDto );

@@ -1,6 +1,5 @@
 package com.schoolar.sb.api.dto;
 
-import com.schoolar.sb.persistent.entity.Department;
 import lombok.Data;
 
 import java.time.LocalDateTime;
@@ -9,7 +8,7 @@ import java.time.LocalDateTime;
 public class PersonDto {
     private Integer id;
     private String name;
-    private Department department;
+    private DepartmentDto department;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
 }

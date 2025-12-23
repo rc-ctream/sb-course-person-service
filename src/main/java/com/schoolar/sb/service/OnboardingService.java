@@ -25,7 +25,7 @@ public class OnboardingService {
 
         log.info( "Starting onboarding process for person: {} attempts: {}", person.getName(), attempts );
 
-        if ( Math.random() > 0.0 ) {
+        if ( Math.random() > 0.3 ) {
             log.error( "Error occurred during onboarding process for person: {}", person.getName() );
             throw new RuntimeException( "Network error" );
         }
